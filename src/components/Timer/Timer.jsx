@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import ControlButton from "../ControlButton/ControlButton";
+import TimerForm from "../TimerForm/TimerForm";
 
 export default function Timer() {
 
@@ -7,29 +8,29 @@ export default function Timer() {
   const [isStarted, setIsStarted] = useState(false)
   const [isPaused, setIsPaused] = useState(true)
 
-  
+
   useEffect(() => {
     let interval = null;
     setTime(3600000)
 
-    if(isStarted && isPaused === false) {
+    if (isStarted && isPaused === false) {
       interval = setInterval(() => {
-        setTime(time => time-10)
+        setTime(time => time - 10)
       }, 10)
     } else {
       clearInterval(interval)
     }
 
-    return(() => clearInterval(interval))
+    return (() => clearInterval(interval))
 
-  },[isStarted, isPaused])
+  }, [isStarted, isPaused])
 
   const handleStart = () => {
-    let valuez = document.getElementById('')
-
-    console.log(valuez.value)
     setIsStarted(true)
     setIsPaused(false)
+
+    let timer = document.getElementById('timer')
+    timer.toggleAttribute('hidden')
   }
 
   const handlePaused = () => {
@@ -42,22 +43,23 @@ export default function Timer() {
     setTime(0);
   }
 
-  return(
+  return (
     <Fragment>
-      <input type="number" name="a" id="inputz" value={0} />
-      <button onClick={handleStart}>Mulai</button>
-      <div className="time">
-        <span>{("0" + Math.floor(time / 360000)).slice(-2)}:</span>
-        <span>{("0" + Math.floor(time / 60000) % 60).slice(-2)}:</span>
-        <span>{("0" + Math.floor(time /1000) % 60).slice(-2)}</span>
+      <TimerForm />
+      <div hidden id="timer">
+        <div className="time" id="time">
+          <span>{("0" + Math.floor(time / 360000)).slice(-2)}:</span>
+          <span>{("0" + Math.floor(time / 60000) % 60).slice(-2)}:</span>
+          <span>{("0" + Math.floor(time / 1000) % 60).slice(-2)}</span>
+        </div>
+        <ControlButton
+          handleStart={handleStart}
+          handlePaused={handlePaused}
+          handleReset={handleReset}
+          isPaused={isPaused}
+          isStarted={isStarted}
+        />
       </div>
-      <ControlButton
-        handleStart={handleStart}
-        handlePaused={handlePaused}
-        handleReset={handleReset}
-        isPaused={isPaused}
-        isStarted={isStarted}
-      />
     </Fragment>
   )
 }

@@ -3,11 +3,11 @@ import Timer from "../Timer/Timer";
 
 class Home extends Component {
   render() {
-    return(
+    return (
       <Fragment>
         <div>
-          <h1>Hello</h1>
-          <Timer/>
+          <h1>Pomodoro App</h1>
+          <Timer />
         </div>
       </Fragment>
     )
