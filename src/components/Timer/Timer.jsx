@@ -29,8 +29,7 @@ export default function Timer() {
     setIsStarted(true)
     setIsPaused(false)
 
-    let timer = document.getElementById('timer')
-    timer.toggleAttribute('hidden')
+    handleToggleAttribute()
   }
 
   const handlePaused = () => {
@@ -41,11 +40,25 @@ export default function Timer() {
     setIsPaused(true)
     setIsStarted(false)
     setTime(0);
+    handleToggleAttribute()
+  }
+
+  function handleToggleAttribute() {
+    let timer = document.getElementById('timer')
+    timer.toggleAttribute('hidden')
+
+    let formTimer = document.getElementById('timer-form')
+    formTimer.toggleAttribute('hidden')
   }
 
   return (
     <Fragment>
-      <TimerForm />
+      <div id="timer-form">
+        <TimerForm 
+          handleStart={handleStart}
+          toggleAttr={true}
+        />
+      </div>
       <div hidden id="timer">
         <div className="time" id="time">
           <span>{("0" + Math.floor(time / 360000)).slice(-2)}:</span>

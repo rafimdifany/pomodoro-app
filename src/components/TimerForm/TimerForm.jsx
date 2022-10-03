@@ -5,11 +5,6 @@ export default function TimerForm(props) {
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
 
-  //TODO : create handleStart while button start is clicked
-  const handleStart = () => {
-
-
-  }
 
   function handleChangeTime() {
     let minute = document.getElementById('minute')
@@ -32,7 +27,7 @@ export default function TimerForm(props) {
         </div>
 
         <div>
-          <button type="button" onClick={handleStart} >Start</button>
+          <button type="button" onClick={props.handleStart} >Start</button>
         </div>
       </form>
     </Fragment>
