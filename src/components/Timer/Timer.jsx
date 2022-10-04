@@ -11,7 +11,6 @@ export default function Timer() {
 
   useEffect(() => {
     let interval = null;
-    setTime(3600000)
 
     if (isStarted && isPaused === false) {
       interval = setInterval(() => {
@@ -28,8 +27,8 @@ export default function Timer() {
   const handleStart = () => {
     setIsStarted(true)
     setIsPaused(false)
-
     handleToggleAttribute()
+
   }
 
   const handlePaused = () => {
@@ -43,12 +42,20 @@ export default function Timer() {
     handleToggleAttribute()
   }
 
+  const handleStartTimer = (minutes, seconds) => {
+    console.log("called")
+    if(minutes != null && seconds != null) {
+      console.log("masuk")
+      setTime((minutes*60000) + (seconds*1000))
+    }
+  }
+
   function handleToggleAttribute() {
     let timer = document.getElementById('timer')
     timer.toggleAttribute('hidden')
 
-    let formTimer = document.getElementById('timer-form')
-    formTimer.toggleAttribute('hidden')
+    let timerForm = document.getElementById('timer-form')
+    timerForm.toggleAttribute('hidden')
   }
 
   return (
@@ -57,9 +64,10 @@ export default function Timer() {
         <TimerForm 
           handleStart={handleStart}
           toggleAttr={true}
+          handleStartTimer={handleStartTimer}
         />
       </div>
-      <div hidden id="timer">
+      <div id="timer" hidden>
         <div className="time" id="time">
           <span>{("0" + Math.floor(time / 360000)).slice(-2)}:</span>
           <span>{("0" + Math.floor(time / 60000) % 60).slice(-2)}:</span>

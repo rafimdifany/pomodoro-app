@@ -14,6 +14,10 @@ export default function TimerForm(props) {
     setSeconds(second.value)
   }
 
+  useEffect(() => {
+    props.handleStartTimer(minutes, seconds)
+  },[minutes, seconds])
+
   return (
     <Fragment>
       <form action="">
