@@ -69,7 +69,7 @@ export default function Timer() {
       </div>
       <div id="timer" hidden>
         <div className="time" id="time">
-          <span>{("0" + Math.floor(time / 360000)).slice(-2)}:</span>
+          <span>{("0" + Math.floor(time / 3600000)).slice(-2)}:</span>
           <span>{("0" + Math.floor(time / 60000) % 60).slice(-2)}:</span>
           <span>{("0" + Math.floor(time / 1000) % 60).slice(-2)}</span>
         </div>
